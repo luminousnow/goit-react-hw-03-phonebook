@@ -2,19 +2,13 @@ import React from 'react';
 import { string, func } from 'prop-types';
 import s from './ContactListItem.module.css';
 
-function ContactListItem({ id, name, number, onDeleteContact }) {
+function ContactListItem({ name, number, onDeleteContact }) {
   return (
     <li className={s.listItem}>
       <p className={s.text}>
         {name}: {number}
       </p>
-      <button
-        type="button"
-        className={s.button}
-        onClick={() => {
-          onDeleteContact(id);
-        }}
-      >
+      <button type="button" className={s.button} onClick={onDeleteContact}>
         delete
       </button>
     </li>
@@ -22,7 +16,6 @@ function ContactListItem({ id, name, number, onDeleteContact }) {
 }
 
 ContactListItem.propTypes = {
-  id: string.isRequired,
   name: string.isRequired,
   number: string.isRequired,
   onDeleteContact: func.isRequired,
