@@ -12,6 +12,25 @@ class App extends Component {
     filter: '',
   };
 
+  // читає дані з localStorage
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    // перевіряє чи не null
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  // оновлює дані в localStorage
+  componentDidUpdate(prevProps, prevState) {
+    // при відмінному state.contacts, оновлює localStorage
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   // видаляє контакт по кліку на кнопку Delete
   deleteContact = contactId => {
     this.setState(prevState => ({
